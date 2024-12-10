@@ -95,19 +95,16 @@ console.log("-------------------------------------------------------------------
 
     let x = i + 1;
     console.log("Iteration " + x);
-    console.log("learner id " + learnerId + " Unique " + uniqueId);
+    
 
     if (learnerId !== uniqueId) {
-      console.log(true);
-      console.log("learner id " + learnerId + " Unique " + uniqueId);
 
       learnerData = { id: learnerId };
       uniqueId = learnerId;
       uniqueIdTracker++;
       result.push(learnerData);
-    } else {
-      console.log(false);
-    }
+    } 
+
     if (assignmentId < 3) {
       if (uniqueIdTracker === 1) {
         assignment = result[uniqueIdTracker - 1];
@@ -121,15 +118,9 @@ console.log("-------------------------------------------------------------------
     } else {
       console.log("Not due yet");
     }
-    //console.log("test" + result);
-    console.log(learnerData);
-
-    console.log(uniqueIdTracker);
+  
     console.log(submissions[i]);
-    // console.log(result[0]);
-    // console.log(result[1]);
-    // console.log(assignmentId);
-    //if(learnerId === result[0].id) console.log("125 " + true);
+
   }
 
   //   result.push({});
