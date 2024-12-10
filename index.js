@@ -92,6 +92,7 @@ console.log("-------------------------------------------------------------------
     const learnerId = submissions[i].learner_id;
     const assignmentId = submissions[i].assignment_id;
     const score = submissions[i].submission.score;
+    let totalPoints = ag.assignments[assignmentId - 1];
 
     let x = i + 1;
     console.log("Iteration " + x);
@@ -107,18 +108,24 @@ console.log("-------------------------------------------------------------------
 
     if (assignmentId < 3) {
       if (uniqueIdTracker === 1) {
+        
         assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score;
+        assignment[assignmentId] = score/totalPoints.points_possible;
         console.log("id 125 " + assignmentId + " " + score);
+
       } else {
+        
         assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score; 
+        assignment[assignmentId] = score/totalPoints.points_possible; 
         console.log("id 132 " + assignmentId + " " + score);
+
       }
     } else {
       console.log("Not due yet");
     }
-  
+   
+    console.log(assignmentId);
+    console.log(totalPoints.points_possible);
     console.log(submissions[i]);
 
   }
