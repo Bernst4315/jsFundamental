@@ -82,7 +82,7 @@ function getLearnerData(course, ag, submissions) {
   //Goal: grab the score for first or both assignment(s)
 console.log("-------------------------------------------------------------------------------------")
   const result = [];
-  let uniqueId = 0;
+  let uniqueId = 0; //used to divid ojs into two groups within same loop
   let learnerData = {};
   let uniqueIdTracker = 0;
   let assignment = [];
@@ -92,12 +92,13 @@ console.log("-------------------------------------------------------------------
     const learnerId = submissions[i].learner_id;
     const assignmentId = submissions[i].assignment_id;
     const score = submissions[i].submission.score;
+    //const score2 = submissions[i].submission.score;
     let totalPoints = ag.assignments[assignmentId - 1];
-
+//keeps track of iterations
     let x = i + 1;
     console.log("Iteration " + x);
     
-
+//creats 2 objs in an array
     if (learnerId !== uniqueId) {
 
       learnerData = { id: learnerId };
@@ -105,10 +106,11 @@ console.log("-------------------------------------------------------------------
       uniqueIdTracker++;
       result.push(learnerData);
     } 
-
-    if (assignmentId < 3) {
+//assigns values to obj in arr
+     
+     if (assignmentId < 3) {
+     
       if (uniqueIdTracker === 1) {
-        
         assignment = result[uniqueIdTracker - 1];
         assignment[assignmentId] = score/totalPoints.points_possible;
         console.log("id 125 " + assignmentId + " " + score);
@@ -117,7 +119,7 @@ console.log("-------------------------------------------------------------------
         
         assignment = result[uniqueIdTracker - 1];
         assignment[assignmentId] = score/totalPoints.points_possible; 
-        console.log("id 132 " + assignmentId + " " + score);
+        console.log("id 132 " + assignmentId + " " + score);//checks assigment id and score
 
       }
     } else {
