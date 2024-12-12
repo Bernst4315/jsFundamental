@@ -77,7 +77,15 @@ const LearnerSubmissions = [
 ];
 
 function getLearnerData(course, ag, submissions) {
-
+try {
+  if(course.id === ag.course_id){
+    console.log(true);
+  }else {
+    throw "Error: Assignment id doesn't match course id"
+  }
+}catch (err){
+  console.log(err)
+}
   const result = [];
   let uniqueId = 0; 
   let uniqueIdTracker = 0; //used to divid ojs into two groups within same loop
