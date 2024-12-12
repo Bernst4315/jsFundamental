@@ -86,6 +86,8 @@ console.log("-------------------------------------------------------------------
   let learnerData = {};
   let uniqueIdTracker = 0;
   let assignment = [];
+  let sum = 0;
+  let totalSum = 0; 
 
   for (let i = 0; i < submissions.length; i++) {
     //This loops through LearnerSubmissions
@@ -93,7 +95,8 @@ console.log("-------------------------------------------------------------------
     const assignmentId = submissions[i].assignment_id;
     const score = submissions[i].submission.score;
     //const score2 = submissions[i].submission.score;
-    let totalPoints = ag.assignments[assignmentId - 1];
+    let totalPoints = ag.assignments[assignmentId - 1].points_possible;
+    
 //keeps track of iterations
     let x = i + 1;
     console.log("Iteration " + x);
@@ -112,13 +115,19 @@ console.log("-------------------------------------------------------------------
      
       if (uniqueIdTracker === 1) {
         assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score/totalPoints.points_possible;
-        console.log("id 125 " + assignmentId + " " + score);
+        assignment[assignmentId] = score/totalPoints;
+        sum += score;
+        totalSum += totalPoints;
+        assignment.ave = sum/totalSum;
+        console.log("id 125 " + assignmentId + "|" + score + "|" + sum + "|" + totalSum);
 
       } else {
         
         assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score/totalPoints.points_possible; 
+        assignment[assignmentId] = score/totalPoints; 
+        sum += score;
+        totalSum += totalPoints;
+        assignment.ave = sum/totalSum;
         console.log("id 132 " + assignmentId + " " + score);//checks assigment id and score
 
       }
