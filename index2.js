@@ -94,7 +94,8 @@ const CourseInfo = {
      
     }
 
-    result.forEach(() => {
+    result.forEach((obj) => {
+        obj.ave = 0;
         console.log("hello")
     })
 

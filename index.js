@@ -77,120 +77,60 @@ const LearnerSubmissions = [
 ];
 
 function getLearnerData(course, ag, submissions) {
-  // CourseInfo purpose is for data verification related to AssignmenGroup
-  // if using one for loop, need to grab all values and insert them at end so there are only two objects in results array
-  //Goal: grab the score for first or both assignment(s)
-console.log("-------------------------------------------------------------------------------------")
+
   const result = [];
-  let uniqueId = 0; //used to divid ojs into two groups within same loop
-  //let learnerData = {};
-  let uniqueIdTracker = 0;
+  let uniqueId = 0; 
+  let uniqueIdTracker = 0; //used to divid ojs into two groups within same loop
   let assignment = [];
   let sum = 0;
-  let totalSum = 0; 
+  let totalSum = 0;
 
   for (let i = 0; i < submissions.length; i++) {
     //This loops through LearnerSubmissions
     const learnerId = submissions[i].learner_id;
     const assignmentId = submissions[i].assignment_id;
     const score = submissions[i].submission.score;
-    let totalPoints = ag.assignments[assignmentId - 1].points_possible;
-    
-//keeps track of iterations
-    let x = i + 1;
-    console.log("Iteration " + x);
-    
-//creats 2 objs in an array
-    if (learnerId !== uniqueId) {
+    const totalPoints = ag.assignments[assignmentId - 1].points_possible;
 
+    //creats 2 objs in an array
+    if (learnerId !== uniqueId) {
       const learnerData = { id: learnerId };
       uniqueId = learnerId;
       uniqueIdTracker++;
       result.push(learnerData);
-    } 
-//assigns values to obj in arr
-     
-     if (assignmentId < 3) {
-     
-      if (uniqueIdTracker === 1) {
-        assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score/totalPoints;
-        sum += score;
-        totalSum += totalPoints;
-        assignment.ave = sum/totalSum;
-        console.log("id 125 " + assignmentId + "|" + score + "|" + sum + "|" + totalSum);
-        console.log("assignment--------- " + result)
-
-      } else {
-        
-        assignment = result[uniqueIdTracker - 1];
-        assignment[assignmentId] = score/totalPoints; 
-        sum += score;
-        totalSum += totalPoints;
-        assignment.ave = sum/totalSum;
-        console.log("id 132 " + assignmentId + " " + score);//checks assigment id and score
-
-      }
-    } else {
-      console.log("Not due yet");
     }
-   
-    console.log(assignmentId);
-    console.log(totalPoints.points_possible);
-    console.log(submissions[i]);
+    //Builds the objs in the arr
 
+    if (assignmentId < 3) {
+      //turn into loop 
+      //unique id tracker can be used as the condition
+      for (let i= 0; i <= 2; i++) {
+        assignment = result[uniqueIdTracker - 1];
+        assignment[assignmentId] = score / totalPoints;
+        sum += score;
+        totalSum += totalPoints;
+        assignment.ave = sum / totalSum;
+      } 
+      
+      
+    //   if (uniqueIdTracker === 1) {
+    //     assignment = result[uniqueIdTracker - 1];
+    //     assignment[assignmentId] = score / totalPoints;
+    //     sum += score;
+    //     totalSum += totalPoints;
+    //     assignment.ave = sum / totalSum;
+    //   } else {
+    //     assignment = result[uniqueIdTracker - 1];
+    //     assignment[assignmentId] = score / totalPoints;
+    //     sum += score;
+    //     totalSum += totalPoints;
+    //     assignment.ave = sum / totalSum;
+    //   }
+    // } else {
+    //   continue;
+    //   //console.log("Not due yet");
+    }
   }
-
-  //   result.push({});
-  //   result.push({});
-
-  //   let x = result[0];
-  //   x[1] = submissions[0].submission.score / ag.assignments[0].points_possible;
-  //   x[2] = submissions[1].submission.score / ag.assignments[1].points_possible;
-  //   x.avg = (submissions[0].submission.score + submissions[1].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
-  //   x.id = 125; //sub @ idx 0,1,or 2
-
-  //   let y = result[1];
-  //   y[1] = submissions[3].submission.score / ag.assignments[0].points_possible;
-  //   y[2] = submissions[4].submission.score / ag.assignments[1].points_possible;
-  //   y.ave = (submissions[3].submission.score + submissions[4].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
-  //   y.id = 132; //sub @ idx 3, or 4
-
-  // if(result[0].id === 125) console.log(true);
-
-  // let newObj = {};
-
-  // for(let i =0; i < submissions.length; i++){
-
-  //   const assignmentId = submissions[i].assignment_id;
-  //   const score = submissions[i].submission.score;
-  //   const learnerId = submissions[i].learner_id;
-  //   let x = 0;
-
-  //   if(learnerId === result[0].id && assignmentId < 3){
-
-  //      learnerData[assignmentId] = score;
-  //      newObj = {...learnerData}
-  //     result.push(newObj);
-  //     uniqueId = learnerId;
-  //     ;
-
-  //   }
-  //   // else {
-  //   //   continue;
-  //   // }
-
-  // }
-  //newObj = {...learnerData};
-
-  //console.log(submissions[0].submission.score)
-
-  //result[0].ave = 78;
-  // const getAve = {ave: 78};
-  // let x = result[0];
-  // x.ave = 78;
-
-  //console.log(result);
 
   return result;
 }
@@ -198,37 +138,17 @@ console.log("-------------------------------------------------------------------
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
-//getLearnerData();
+//   result.push({});
+//   result.push({});
 
-// const result = [
-//   {
-//     id: 125,
-//     avg: 0.985, // (47 + 150) / (50 + 150)
-//     1: 0.94, // 47 / 50
-//     2: 1.0 // 150 / 150
-//   },
-//   {
-//     id: 132,
-//     avg: 0.82, // (39 + 125) / (50 + 150)
-//     1: 0.78, // 39 / 50
-//     2: 0.833 // late: (140 - 15) / 150
-//   }
-// ];
+//   let x = result[0];
+//   x[1] = submissions[0].submission.score / ag.assignments[0].points_possible;
+//   x[2] = submissions[1].submission.score / ag.assignments[1].points_possible;
+//   x.avg = (submissions[0].submission.score + submissions[1].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
+//   x.id = 125; //sub @ idx 0,1,or 2
 
-// let newArr = [];
-// let obj = {};
-
-// for(let i = 0; i < 4; i++){
-//     let newObj = {};
-
-//     for(let j = 0; j < arr[0].length; j++){
-
-//         let prop = arr[0][j].toLowerCase();
-//         let value = arr[i+1][j];
-//         obj[prop] = value;
-//         newObj= {...obj};
-
-//     }
-
-//     newArr.push(newObj);
-// }
+//   let y = result[1];
+//   y[1] = submissions[3].submission.score / ag.assignments[0].points_possible;
+//   y[2] = submissions[4].submission.score / ag.assignments[1].points_possible;
+//   y.ave = (submissions[3].submission.score + submissions[4].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
+//   y.id = 132; //sub @ idx 3, or 4
