@@ -101,16 +101,16 @@ function getLearnerData(course, ag, submissions) {
     }
     //Builds the objs in the arr
 
-    if (assignmentId < 3) {
+    if (assignmentId < 3) { //this section of code uploads assignments and calculates scores
       //turn into loop 
       //unique id tracker can be used as the condition
-      for (let i= 0; i <= 2; i++) {
+      //for (let i= 0; i <= 3; i++) { 
         assignment = result[uniqueIdTracker - 1];
         assignment[assignmentId] = score / totalPoints;
         sum += score;
         totalSum += totalPoints;
         assignment.ave = sum / totalSum;
-      } 
+      //} 
       
       
     //   if (uniqueIdTracker === 1) {
