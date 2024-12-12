@@ -80,12 +80,7 @@ function getLearnerData(course, ag, submissions) {
 try {
   if(course.id === ag.course_id){
     console.log(true);
-  }else {
-    throw "Error: Assignment id doesn't match course id"
-  }
-}catch (err){
-  console.log(err)
-}
+
   const result = [];
   let uniqueId = 0; 
   let uniqueIdTracker = 0; //used to divid ojs into two groups within same loop
@@ -109,54 +104,26 @@ try {
     }
     //Builds the objs in the arr
 
-    if (assignmentId < 3) { //this section of code uploads assignments and calculates scores
-      //turn into loop 
-      //unique id tracker can be used as the condition
-      //for (let i= 0; i <= 3; i++) { 
+    if (assignmentId < 3) { //this section of code uploads assignments and calculates scores 
         assignment = result[uniqueIdTracker - 1];
         assignment[assignmentId] = score / totalPoints;
         sum += score;
         totalSum += totalPoints;
         assignment.ave = sum / totalSum;
-      //} 
-      
-      
-    //   if (uniqueIdTracker === 1) {
-    //     assignment = result[uniqueIdTracker - 1];
-    //     assignment[assignmentId] = score / totalPoints;
-    //     sum += score;
-    //     totalSum += totalPoints;
-    //     assignment.ave = sum / totalSum;
-    //   } else {
-    //     assignment = result[uniqueIdTracker - 1];
-    //     assignment[assignmentId] = score / totalPoints;
-    //     sum += score;
-    //     totalSum += totalPoints;
-    //     assignment.ave = sum / totalSum;
-    //   }
-    // } else {
-    //   continue;
-    //   //console.log("Not due yet");
+
     }
   }
-
+  
   return result;
+}else {
+  throw "Error: Assignment id doesn't match course id"
+}
+}catch (err){
+console.log(err)
+}
 }
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
-//   result.push({});
-//   result.push({});
 
-//   let x = result[0];
-//   x[1] = submissions[0].submission.score / ag.assignments[0].points_possible;
-//   x[2] = submissions[1].submission.score / ag.assignments[1].points_possible;
-//   x.avg = (submissions[0].submission.score + submissions[1].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
-//   x.id = 125; //sub @ idx 0,1,or 2
-
-//   let y = result[1];
-//   y[1] = submissions[3].submission.score / ag.assignments[0].points_possible;
-//   y[2] = submissions[4].submission.score / ag.assignments[1].points_possible;
-//   y.ave = (submissions[3].submission.score + submissions[4].submission.score) / (ag.assignments[0].points_possible + ag.assignments[1].points_possible);
-//   y.id = 132; //sub @ idx 3, or 4
