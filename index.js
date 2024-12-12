@@ -94,7 +94,6 @@ console.log("-------------------------------------------------------------------
     const learnerId = submissions[i].learner_id;
     const assignmentId = submissions[i].assignment_id;
     const score = submissions[i].submission.score;
-    //const score2 = submissions[i].submission.score;
     let totalPoints = ag.assignments[assignmentId - 1].points_possible;
     
 //keeps track of iterations
@@ -190,14 +189,14 @@ console.log("-------------------------------------------------------------------
   // let x = result[0];
   // x.ave = 78;
 
-  console.log(result);
+  //console.log(result);
 
-  //return result;
+  return result;
 }
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
-//console.log(result);
+console.log(result);
 //getLearnerData();
 
 // const result = [
