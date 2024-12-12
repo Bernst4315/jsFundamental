@@ -83,7 +83,7 @@ function getLearnerData(course, ag, submissions) {
 console.log("-------------------------------------------------------------------------------------")
   const result = [];
   let uniqueId = 0; //used to divid ojs into two groups within same loop
-  let learnerData = {};
+  //let learnerData = {};
   let uniqueIdTracker = 0;
   let assignment = [];
   let sum = 0;
@@ -103,7 +103,7 @@ console.log("-------------------------------------------------------------------
 //creats 2 objs in an array
     if (learnerId !== uniqueId) {
 
-      learnerData = { id: learnerId };
+      const learnerData = { id: learnerId };
       uniqueId = learnerId;
       uniqueIdTracker++;
       result.push(learnerData);
@@ -119,6 +119,7 @@ console.log("-------------------------------------------------------------------
         totalSum += totalPoints;
         assignment.ave = sum/totalSum;
         console.log("id 125 " + assignmentId + "|" + score + "|" + sum + "|" + totalSum);
+        console.log("assignment--------- " + result)
 
       } else {
         
