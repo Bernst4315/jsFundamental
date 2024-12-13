@@ -92,9 +92,13 @@ try {
     //This loops through LearnerSubmissions
     const learnerId = submissions[i].learner_id;
     const assignmentId = submissions[i].assignment_id;
-    const score = submissions[i].submission.score; //there need to be something that compares due date and submitted date and checks for late subs (extra loop here). maybe make it a function?
+    let score = submissions[i].submission.score; //there need to be something that compares due date and submitted date and checks for late subs (extra loop here). maybe make it a function?
+    const dateSubmitted = Number(submissions[i].submission.submitted_at.replaceAll("-", ""));
+    const dateDue = Number(ag.assignments[assignmentId - 1].due_at.replaceAll("-", ""));
+    let isLate = false;
+    let notDue = false; 
    //ture date into arry or str. compare month first then day
-
+    
     const totalPoints = ag.assignments[assignmentId - 1].points_possible;
 
     //creats 2 objs in an array
@@ -105,9 +109,18 @@ try {
       result.push(learnerData);
     }
     //Builds the objs in the arr
+     if(dateSubmitted <= dateDue){
+        isLate = false
+       } else if(dateSubmitted > dateDue){
+          isLate = true
+          score = score * .9
+       } else {
+        notDue = true;
+       }
 
     if (assignmentId < 3) { //this section of code uploads assignments and calculates scores 
        //code conditon to have var that has already compared curent date with due date to see if there are things not yet due
+  
       assignment = result[uniqueIdTracker - 1];
         assignment[assignmentId] = score / totalPoints;
         sum += score;
@@ -115,6 +128,7 @@ try {
         assignment.ave = sum / totalSum;
 
     }
+    console.log(dateSubmitted, dateDue, isLate)
   }
   
   return result;
